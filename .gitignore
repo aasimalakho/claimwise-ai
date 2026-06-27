@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Environment variables / secrets
+.env
+.env.local
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Model artifacts (optional — keep if you want trained models committed for hackathon judges to use directly)
+# Uncomment the lines below if you'd rather NOT commit large model files:
+# *.joblib
+
+# Test/scratch files
+data/test_set.csv
