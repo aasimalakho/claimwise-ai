@@ -2,7 +2,13 @@
 
 ### AI-Powered Insurance Claims Investigation & Settlement
 
-Built for **UiPath AgentHack 2026**
+Built for UiPath AgentHack 2026
+
+## Demo
+
+- **Live API (Hugging Face):** https://aasimalakho-claimwise-ai.hf.space
+- **Swagger UI:** https://aasimalakho-claimwise-ai.hf.space/docs
+- **Demo Video:** https://youtu.be/8V-ebvuLV-w?si=BfdjRmH2Ei7Degnb
 ---
 
 # Project Description
@@ -40,7 +46,7 @@ For every submitted claim, the platform:
 - Predicts the claim category
 - Calculates fraud probability
 - Explains why the prediction was made
-- Recommends the appropriate investigation workflow
+- Generates an AI recommendation to support the investigation workflow.
 
 Rather than replacing human investigators, ClaimWise AI prioritizes their attention where it matters most.
 
@@ -65,8 +71,7 @@ ClaimWise AI combines a **coded AI agent** with UiPath orchestration.
 - **UiPath Maestro Case:** Orchestrates the insurance claims lifecycle.
 - **UiPath API Workflows:** Connects UiPath with the external AI service.
 
-This solution uses a coded AI agent integrated with UiPath Maestro Case and API Workflows. It does not rely on UiPath Agent Builder.
-
+This solution uses a coded AI agent integrated with UiPath Maestro Case and UiPath API Workflows for enterprise case orchestration. It does not rely on UiPath Agent Builder.
 
 ---
 
@@ -137,10 +142,10 @@ ClaimWise AI acts as the intelligence layer within the Investigation phase of Ui
 
 | UiPath Stage | ClaimWise AI Contribution |
 |--------------|--------------------------|
-| Intake | Receives extracted claim information from UiPath Document Understanding |
-| Investigation | Performs NLP classification, fraud prediction, and explainability |
-| Human Review | Provides SHAP explanations for investigators |
-| Settlement | Supports human review with AI-generated recommendations before settlement |
+| Intake | Collects and prepares claim information for AI analysis |
+| Investigation | Invokes the AI service for claim classification, fraud risk prediction, and explainability |
+| Human Review | Presents AI recommendations and SHAP explanations to the adjuster |
+| Settlement | Completes the case after the adjuster's decision |
 
 ---
 
@@ -245,24 +250,27 @@ Processes an insurance claim and returns:
 - Pandas
 - NumPy
 - Joblib
+- Hugging Face Spaces
+- Swagger UI
+- REST API
+- TF-IDF
+- Logistic Regression
 - UiPath Maestro Case
 - UiPath API Workflows
 - UiPath Automation Cloud
-- Hugging Face Spaces
-- Swagger UI
 
 ---
 
 # Repository Contents
 
-- Source code for the FastAPI AI service
-- Trained machine learning models
+- FastAPI AI service
+- Machine learning models for claim classification and fraud risk prediction
 - Model training scripts
-- Synthetic dataset generator
+- Synthetic insurance claims dataset generator
 - Docker configuration
-- API documentation
+- Interactive API documentation via Swagger UI
 - Project documentation
-
+  
 ---
 
 # Setup Instructions
@@ -278,7 +286,7 @@ Processes an insurance claim and returns:
 
 ```bash
 git clone https://github.com/aasimalakho/claimwise-ai.git
-cd <your-repository>
+cd claimwise-ai
 ```
 
 ## 2. Install Dependencies
