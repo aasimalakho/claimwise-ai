@@ -65,7 +65,8 @@ ClaimWise AI combines a **coded AI agent** with UiPath orchestration.
 - **UiPath Maestro Case:** Orchestrates the insurance claims lifecycle.
 - **UiPath API Workflows:** Connects UiPath with the external AI service.
 
-This solution does **not** use UiPath Agent Builder. Instead, it integrates an externally developed coded AI service with UiPath Automation Cloud.
+This solution uses a coded AI agent integrated with UiPath Maestro Case and API Workflows. It does not rely on UiPath Agent Builder.
+
 
 ---
 
@@ -85,7 +86,7 @@ Every prediction includes human-readable explanations generated using **SHAP**, 
 
 ### Automated Case Routing
 
-Based on the predicted fraud probability, ClaimWise AI recommends one of three actions:
+Based on the AI analysis, ClaimWise AI recommends one of the following actions:
 
 - **Recommend Settlement**
 - **Human Review**
@@ -138,7 +139,6 @@ ClaimWise AI acts as the intelligence layer within the Investigation phase of Ui
 |--------------|--------------------------|
 | Intake | Receives extracted claim information from UiPath Document Understanding |
 | Investigation | Performs NLP classification, fraud prediction, and explainability |
-| Decision | Returns routing recommendation |
 | Human Review | Provides SHAP explanations for investigators |
 | Settlement | Supports human review with AI-generated recommendations before settlement |
 
@@ -248,6 +248,20 @@ Processes an insurance claim and returns:
 - UiPath Maestro Case
 - UiPath API Workflows
 - UiPath Automation Cloud
+- Hugging Face Spaces
+- Swagger UI
+
+---
+
+# Repository Contents
+
+- Source code for the FastAPI AI service
+- Trained machine learning models
+- Model training scripts
+- Synthetic dataset generator
+- Docker configuration
+- API documentation
+- Project documentation
 
 ---
 
@@ -263,7 +277,7 @@ Processes an insurance claim and returns:
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/<your-repository>.git
+git clone https://github.com/aasimalakho/claimwise-ai.git
 cd <your-repository>
 ```
 
@@ -300,7 +314,7 @@ http://localhost:8000/docs
 
 ## 6. Deploy the API
 
-Deploy the FastAPI application to Hugging Face Spaces (or another FastAPI-compatible hosting platform). Once deployed, the API endpoint will be available for integration with UiPath.
+Deploy the FastAPI application to Hugging Face Spaces (used in this project) or any FastAPI-compatible hosting platform. Once deployed, the API endpoint will be available for integration with UiPath.
 
 ## 7. Configure UiPath
 
