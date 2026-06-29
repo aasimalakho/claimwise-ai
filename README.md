@@ -2,9 +2,16 @@
 
 ### AI-Powered Insurance Claims Investigation & Settlement
 
-ClaimWise AI is an intelligent insurance claims analysis platform that helps insurers process claims faster, detect potential fraud earlier, and provide transparent AI-assisted decision support.
+Built for **UiPath AgentHack 2026**
+---
 
-Built for **UiPath AgentHack 2026**, ClaimWise AI integrates with **UiPath Maestro Case** to automate the investigation stage of the claims lifecycle while ensuring every high-impact decision remains explainable and reviewable by human investigators.
+# Project Description
+
+Insurance claims processing is often slow, labor-intensive, and vulnerable to fraud, requiring adjusters to manually review large volumes of claims while ensuring legitimate customers receive timely settlements.
+
+**ClaimWise AI** is an AI-powered insurance claims investigation and case management solution that combines **UiPath Maestro Case**, **API Workflows**, and **machine learning** to streamline the claims lifecycle. It classifies claim types, predicts fraud risk, and provides explainable AI insights to support insurance adjusters during investigations.
+
+Using **UiPath Maestro Case**, every claim progresses through **Intake**, **Investigation**, **Human Review**, and **Settlement**, ensuring that AI augments human decision-making rather than replacing it. The result is faster investigations, improved consistency, enhanced fraud detection, and transparent, human-centered claim processing.
 
 ---
 
@@ -39,6 +46,29 @@ Rather than replacing human investigators, ClaimWise AI prioritizes their attent
 
 ---
 
+# UiPath Components Used
+
+ClaimWise AI leverages the following UiPath capabilities:
+
+- UiPath Maestro Case
+- UiPath API Workflows
+- UiPath Automation Cloud
+- Case Rules
+
+---
+
+# Agent Type
+
+ClaimWise AI combines a **coded AI agent** with UiPath orchestration.
+
+- **Coded Agent:** FastAPI-based machine learning service for claim classification, fraud risk prediction, and explainable AI.
+- **UiPath Maestro Case:** Orchestrates the insurance claims lifecycle.
+- **UiPath API Workflows:** Connects UiPath with the external AI service.
+
+This solution does **not** use UiPath Agent Builder. Instead, it integrates an externally developed coded AI service with UiPath Automation Cloud.
+
+---
+
 # Key Capabilities
 
 ### Intelligent Claim Understanding
@@ -57,32 +87,45 @@ Every prediction includes human-readable explanations generated using **SHAP**, 
 
 Based on the predicted fraud probability, ClaimWise AI recommends one of three actions:
 
-- **Auto Settlement**
+- **Recommend Settlement**
 - **Human Review**
 - **Flag for Investigation**
 
 ---
 
-# Workflow
+# Solution Architecture
 
 ```text
 Customer submits claim
           │
           ▼
-Claim information extracted
+UiPath Maestro Case
           │
           ▼
-ClaimWise AI Analysis
-     • Claim Classification
-     • Fraud Risk Prediction
-     • SHAP Explainability
+Intake
           │
           ▼
-Decision Engine
+Investigation
           │
-          ├── Auto Settlement
-          ├── Human Review
-          └── Investigation
+          ▼
+UiPath API Workflow
+          │
+          ▼
+ClaimWise AI (FastAPI)
+          │
+    ┌─────┼────────────────────────┐
+    │     │                        │
+    ▼     ▼                        ▼
+Claim  Fraud Risk           SHAP Explainable
+Type    Prediction          AI Insights
+Classification
+    └──────────────┬───────────────┘
+                   ▼
+           Human Review
+        (Adjuster Decision)
+                   │
+                   ▼
+             Settlement
 ```
 
 ---
@@ -97,7 +140,7 @@ ClaimWise AI acts as the intelligence layer within the Investigation phase of Ui
 | Investigation | Performs NLP classification, fraud prediction, and explainability |
 | Decision | Returns routing recommendation |
 | Human Review | Provides SHAP explanations for investigators |
-| Settlement | Enables faster approval of low-risk claims |
+| Settlement | Supports human review with AI-generated recommendations before settlement |
 
 ---
 
@@ -203,41 +246,73 @@ Processes an insurance claim and returns:
 - NumPy
 - Joblib
 - UiPath Maestro Case
+- UiPath API Workflows
+- UiPath Automation Cloud
 
 ---
 
-# Getting Started
+# Setup Instructions
 
-## Install Dependencies
+## Prerequisites
+
+- Python 3.11+
+- UiPath Automation Cloud
+- UiPath Maestro Case
+- UiPath API Workflows
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/<your-username>/<your-repository>.git
+cd <your-repository>
+```
+
+## 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Generate Dataset *(Optional)*
+## 3. Generate the Dataset (Optional)
 
 ```bash
 python data/generate_data.py
 ```
 
-## Train the Models
+## 4. Train the Models
 
 ```bash
 python models/train_model_v2.py
 python models/train_nlp_classifier.py
 ```
 
-## Run the API
+## 5. Run the FastAPI Application
 
 ```bash
 uvicorn app.main:app --reload --port 8000
 ```
 
-Interactive API documentation is available at:
+The interactive API documentation will be available at:
 
 ```text
 http://localhost:8000/docs
 ```
+
+## 6. Deploy the API
+
+Deploy the FastAPI application to Hugging Face Spaces (or another FastAPI-compatible hosting platform). Once deployed, the API endpoint will be available for integration with UiPath.
+
+## 7. Configure UiPath
+
+1. Create an **API Workflow** in UiPath Automation Cloud.
+2. Configure the HTTP Request activity to call the deployed `/process_claim` endpoint.
+3. Publish the API Workflow.
+4. Reference the published API Workflow in the **Investigation** stage of **UiPath Maestro Case**.
+5. Configure the required input arguments and map the API response to the workflow outputs.
+
+## 8. Run the Solution
+
+Start a new case in **UiPath Maestro Case**. The Investigation stage invokes the API Workflow, which calls the deployed ClaimWise AI service. The AI returns the claim classification, fraud risk score, explanation, and recommendation for **Human Review** before the case proceeds to **Settlement**.
 
 ---
 
